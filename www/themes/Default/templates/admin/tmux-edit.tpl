@@ -87,8 +87,8 @@
 			<tr>
 				<td><label for="SEQUENTIAL">Run Sequential:</label></td>
 				<td>
-					{html_options class="siteeditstyle" id="SEQUENTIAL" name='SEQUENTIAL' values=$sequential_ids output=$sequential_names selected=$ftmux->SEQUENTIAL}
-					<div class="hint">Basic Sequential runs update_binaries, backfill and update releases_sequentially.<br />Complete Sequential runs threaded.sh(copied to user_threaded.sh), this still runs import in its own pane. This will alow you to reoder the script in any order you like. The idea is to get each individual script to run at or near your desired load level.<br />Changing requires restart.</div>
+					{html_radios id="SEQUENTIAL" name='SEQUENTIAL' values=$truefalse_names output=$truefalse_names selected=$ftmux->SEQUENTIAL separator='<br />'}
+					<div class="hint">Choose to run update_binaries, backfill and update releases_sequentially. Changing requires restart. true/false</div>
 				</td>
 			</tr>
 
@@ -336,14 +336,30 @@
 <fieldset>
 	<legend>Remove Crap Releases</legend>
 		<table class="input">
-			<tr>
-				<td><label for="FIX_CRAP">Remove Crap Releases:</label></td>
+					<tr>
+				<td><label for="CRAP_BLACK">Remove blacklisted releases:</label></td>
 				<td>
-					{html_options class="siteeditstyle" id="FIX_CRAP" name='FIX_CRAP' values=$fix_crap_ids output=$fix_crap_names selected=$ftmux->FIX_CRAP}
-					<div class="hint">Choose to run Remove Crap Releases. You can all or one.</div>
+					{html_radios id="CRAP_BLACK" name='CRAP_BLACK' values=$truefalse_names output=$truefalse_names selected=$ftmux->CRAP_BLACK separator='<br />'}
+					<div class="hint">Deletes releases after applying the configured blacklist regexes.</div>
 				</td>
 			</tr>
-
+			
+			<tr>
+				<td><label for="CRAP_EXE">Remove executable releases:</label></td>
+				<td>
+					{html_radios id="CRAP_EXE" name='CRAP_EXE' values=$truefalse_names output=$truefalse_names selected=$ftmux->CRAP_EXE separator='<br />'}
+					<div class="hint">Deletes releases not in other misc or the apps sections and contain an .exe file.</div>
+				</td>
+			</tr>			
+			
+			<tr>
+				<td><label for="CRAP_GIBBERISH">Remove gibberish releases:</label></td>
+				<td>
+					{html_radios id="CRAP_GIBBERISH" name='CRAP_GIBBERISH' values=$truefalse_names output=$truefalse_names selected=$ftmux->CRAP_GIBBERISH separator='<br />'}
+					<div class="hint">Deletes releases where the name is only letters or numbers and is 15 characters or more.</div>
+				</td>
+			</tr>
+			
 			<tr>
 				<td style="width:160px;"><label for="CRAP_TIMER">Remove Crap Releases Sleep Timer:</label></td>
 				<td>
